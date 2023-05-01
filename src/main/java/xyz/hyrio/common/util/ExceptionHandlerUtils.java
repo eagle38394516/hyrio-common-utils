@@ -1,17 +1,18 @@
 package xyz.hyrio.common.util;
 
-import lombok.experimental.UtilityClass;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import xyz.hyrio.common.exception.internal.InternalException;
 import xyz.hyrio.common.exception.request.*;
 import xyz.hyrio.common.pojo.vo.CommonVo;
-import xyz.hyrio.common.exception.internal.InternalException;
 
 import static org.springframework.util.StringUtils.hasText;
 
-@UtilityClass
-public class ExceptionHandlerUtils {
+public final class ExceptionHandlerUtils {
+    private ExceptionHandlerUtils() {
+    }
+
     private static final ThreadLocal<Exception> exceptionTl = new ThreadLocal<>();
     private static final ThreadLocal<HttpStatus> statusTl = new ThreadLocal<>();
 

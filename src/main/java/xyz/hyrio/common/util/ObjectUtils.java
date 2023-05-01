@@ -1,6 +1,5 @@
 package xyz.hyrio.common.util;
 
-import lombok.experimental.UtilityClass;
 import xyz.hyrio.common.exception.internal.DatabaseException;
 import xyz.hyrio.common.exception.request.InvalidParameterException;
 
@@ -12,8 +11,10 @@ import java.util.*;
 import static org.springframework.util.ObjectUtils.isEmpty;
 import static org.springframework.util.StringUtils.*;
 
-@UtilityClass
-public class ObjectUtils {
+public final class ObjectUtils {
+    private ObjectUtils() {
+    }
+
     public static final String WHITESPACE_REGEX = "\\s+";
     public static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 

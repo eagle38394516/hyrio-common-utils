@@ -1,7 +1,7 @@
 package xyz.hyrio.common.tool;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -13,13 +13,34 @@ import java.util.function.Consumer;
 
 import static xyz.hyrio.common.util.ObjectUtils.requireHasTextElse;
 
-@Slf4j
 public class FileModificationWatcher {
-    @Getter private final Path watchedFile;
-    @Getter private final Consumer<Path> callback;
-    @Getter private final Duration callbackMinInterval;
-    @Getter private final String runnerThreadName;
-    @Getter private final boolean runCallbackImmediately;
+    private static final Logger log = LoggerFactory.getLogger(FileModificationWatcher.class);
+
+    private final Path watchedFile;
+    private final Consumer<Path> callback;
+    private final Duration callbackMinInterval;
+    private final String runnerThreadName;
+    private final boolean runCallbackImmediately;
+
+    public Path getWatchedFile() {
+        return watchedFile;
+    }
+
+    public Consumer<Path> getCallback() {
+        return callback;
+    }
+
+    public Duration getCallbackMinInterval() {
+        return callbackMinInterval;
+    }
+
+    public String getRunnerThreadName() {
+        return runnerThreadName;
+    }
+
+    public boolean isRunCallbackImmediately() {
+        return runCallbackImmediately;
+    }
 
     private final ScheduledExecutorService executor;
     private long lastRunTimestamp = 0L;

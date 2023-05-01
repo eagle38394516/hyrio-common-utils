@@ -3,7 +3,6 @@ package xyz.hyrio.common.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.experimental.UtilityClass;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import xyz.hyrio.common.exception.internal.InternalException;
@@ -25,8 +24,10 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 import static org.springframework.util.StringUtils.getFilenameExtension;
 import static org.springframework.util.StringUtils.hasText;
 
-@UtilityClass
-public class ServletUtils {
+public final class ServletUtils {
+    private ServletUtils() {
+    }
+
     public static String getIpAddressFromRequest(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for"); // apache2 / WAF
         if (hasText(ip)) {

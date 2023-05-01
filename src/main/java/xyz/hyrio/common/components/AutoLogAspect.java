@@ -1,11 +1,12 @@
 package xyz.hyrio.common.components;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +17,9 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Component
 @Aspect
-@Slf4j
 public class AutoLogAspect {
+    private static final Logger log = LoggerFactory.getLogger(AutoLogAspect.class);
+
     @Around("@annotation(xyz.hyrio.common.components.AutoLog)")
     public Object autoLog(ProceedingJoinPoint pjp) throws Throwable {
         Signature signature = pjp.getSignature();

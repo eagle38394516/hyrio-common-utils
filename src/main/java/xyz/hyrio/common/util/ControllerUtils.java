@@ -1,7 +1,6 @@
 package xyz.hyrio.common.util;
 
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.experimental.UtilityClass;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,8 +21,10 @@ import java.util.zip.ZipOutputStream;
 import static org.springframework.util.StringUtils.hasText;
 import static xyz.hyrio.common.util.ObjectUtils.requireHasText;
 
-@UtilityClass
-public class ControllerUtils {
+public final class ControllerUtils {
+    private ControllerUtils() {
+    }
+
     private static void transferInToOut(InputStream in, HttpServletResponse response) throws IOException {
         try (BufferedInputStream bis = new BufferedInputStream(in);
              BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream())) {

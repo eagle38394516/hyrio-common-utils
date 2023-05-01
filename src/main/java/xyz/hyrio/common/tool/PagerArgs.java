@@ -1,7 +1,5 @@
 package xyz.hyrio.common.tool;
 
-import lombok.Data;
-
 import java.util.List;
 
 /**
@@ -9,13 +7,37 @@ import java.util.List;
  *
  * @author Hyrio 2021/11/12 16:37
  */
-@Data
 public class PagerArgs {
     private static final int DEFAULT_PAGE_SIZE = 10;
 
     private int totalCount;
     private final int currentPage;
     private final int pageSize;
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    @Override
+    public String toString() {
+        return "PagerArgs{" +
+               "totalCount=" + totalCount +
+               ", currentPage=" + currentPage +
+               ", pageSize=" + pageSize +
+               '}';
+    }
 
     public PagerArgs(Integer currentPage, Integer pageSize) {
         this.currentPage = currentPage == null || currentPage <= 0 ? 1 : currentPage;

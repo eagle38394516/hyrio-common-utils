@@ -1,12 +1,13 @@
 package xyz.hyrio.common.util;
 
-import lombok.experimental.UtilityClass;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 
-@UtilityClass
 @Deprecated
-public class ThrowableUtils {
+public final class ThrowableUtils {
+    private ThrowableUtils() {
+    }
+
     public static final int DEFAULT_MAX_STACK_TRACES = 20;
 
     public static void logWithThrowable(Logger log, Level level, Throwable t, int maxStackTraces, String fmt, Object... args) {

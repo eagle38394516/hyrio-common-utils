@@ -2,9 +2,8 @@ package xyz.hyrio.common.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerInterceptor;
 import xyz.hyrio.common.util.ExceptionHandlerUtils;
@@ -14,8 +13,9 @@ import java.util.Optional;
 
 import static xyz.hyrio.common.util.ServletUtils.*;
 
-@Slf4j
 public class ShowRequestInterceptor implements HandlerInterceptor {
+    private static final Logger log = LoggerFactory.getLogger(ShowRequestInterceptor.class);
+
     private final boolean logException;
 
     public ShowRequestInterceptor() {
@@ -26,7 +26,15 @@ public class ShowRequestInterceptor implements HandlerInterceptor {
         this.logException = logException;
     }
 
-    @Getter @Setter private String[][] skipLogRecordUris;
+    private String[][] skipLogRecordUris;
+
+    public String[][] getSkipLogRecordUris() {
+        return skipLogRecordUris;
+    }
+
+    public void setSkipLogRecordUris(String[][] skipLogRecordUris) {
+        this.skipLogRecordUris = skipLogRecordUris;
+    }
 
     // For example, if you want to log the current user the request, you can override this method.
     public String getLogExtraField() {

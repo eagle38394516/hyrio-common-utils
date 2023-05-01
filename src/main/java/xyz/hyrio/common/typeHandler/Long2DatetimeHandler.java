@@ -1,6 +1,5 @@
 package xyz.hyrio.common.typeHandler;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
@@ -16,7 +15,6 @@ import java.util.Optional;
  */
 @MappedTypes({long.class, Long.class})
 @MappedJdbcTypes(JdbcType.TIMESTAMP)
-@Slf4j
 public class Long2DatetimeHandler implements TypeHandler<Long> {
     @Override
     public void setParameter(PreparedStatement ps, int i, Long parameter, JdbcType jdbcType) throws SQLException {

@@ -2,9 +2,8 @@ package xyz.hyrio.common.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import xyz.hyrio.common.exception.request.AuthorizationException;
 
@@ -12,8 +11,9 @@ import static xyz.hyrio.common.util.ObjectUtils.blank2NullOtherwiseStrip;
 import static xyz.hyrio.common.util.ObjectUtils.requireHasTextElse;
 import static xyz.hyrio.common.util.ServletUtils.isUriIn;
 
-@Slf4j
 public class AuthCheckInterceptor implements HandlerInterceptor {
+    private static final Logger log = LoggerFactory.getLogger(AuthCheckInterceptor.class);
+
     public static final String DEFAULT_TOKEN_HEADER_KEY = "token";
 
     public interface TokenValidator {
@@ -22,10 +22,26 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
         void clearStates();
     }
 
-    @Getter @Setter private String[][] skipAuthCheckUris;
-    @Getter @Setter private String tokenKey = DEFAULT_TOKEN_HEADER_KEY;
+    private String[][] skipAuthCheckUris;
+    private String tokenKey = DEFAULT_TOKEN_HEADER_KEY;
 
     private final TokenValidator tokenValidator;
+
+    public String[][] getSkipAuthCheckUris() {
+        return skipAuthCheckUris;
+    }
+
+    public void setSkipAuthCheckUris(String[][] skipAuthCheckUris) {
+        this.skipAuthCheckUris = skipAuthCheckUris;
+    }
+
+    public String getTokenKey() {
+        return tokenKey;
+    }
+
+    public void setTokenKey(String tokenKey) {
+        this.tokenKey = tokenKey;
+    }
 
     public AuthCheckInterceptor(TokenValidator tokenValidator) {
         this.tokenValidator = tokenValidator;
